@@ -1,6 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const createError = require('http-errors')
+const dotenv = require('dotenv').config()
+
+const PORT = process.env.PORT || 3000
 
 const app = express()
 app.use(express.json())
@@ -11,7 +14,11 @@ app.use(express.urlencoded({extended :  true}))
 //     user : "abhinavk0212",
 //     pass : "iot12345"
 // })
-mongoose.connect('mongodb+srv://abhinavk0212:iot12345@cluster0.ez5zvgw.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.MONGODB_URI, {
+    dbName : process.env.DB_NAME,
+    user : process.env.DB_USER,
+    pass : process.env.DB_PASS
+})
 .then(() => {
     console.log('Mongodb connected ... ')
 })
@@ -39,6 +46,6 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.listen(3000, () => {
-    console.log('server started on port 3000....')
+app.listen(PORT, () => {
+    console.log('server started on port ' + PORT + '.....')
 })
