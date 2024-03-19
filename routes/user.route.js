@@ -47,7 +47,7 @@ router.post('/', async (req, res, next) => {
 //main logic
 router.post('/func', async (req, res, next) => {
     const { sender_id, receiver_id } = req.body;
-    console.log(req)
+    console.log(req.body)
     try {
         if (!sender_id || !receiver_id) {
             return res.status(400).json({ error: 'Both sender_id and receiver_id are required' });
