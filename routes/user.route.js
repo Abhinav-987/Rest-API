@@ -36,6 +36,8 @@ router.post('/', async (req, res, next) => {
     try {
         const user = new User(req.body)
         const result = await user.save()
+        console.log(user);
+        console.log(result);
         res.send(result)
     }catch(error){
         console.log(error.message)
