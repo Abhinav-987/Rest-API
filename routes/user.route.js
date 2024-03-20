@@ -15,22 +15,18 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-// router.get('/mac', async (req, res, next) => {
-//     const { mac } = req.query;
-//     console.log("MAC Address:", mac); // Log MAC address
-//     try {
-//         const user = await User.findOne({ mac_add: mac });
-//         if (user) {
-//             res.status(200).send({ user_id: user.user_id });
-//         } else {
-//             console.log("User not found for MAC:", mac); // Log if user not found
-//             res.status(404).send({ error: "User not found" });
-//         }
-//     } catch (error) {
-//         console.log("Error:", error.message); // Log any errors
-//         res.status(500).send({ error: "Internal Server Error" });
-//     }
-// });
+router.get('/data', async (req, res, next) => {
+    const {userId} = req.body
+    try {
+        const user = await User.findOne({ user_id: userId });
+        if (!user) {
+            throw createError(404, 'User not found');
+        }
+        res.json({ name: user.name });
+    } catch (error) {
+        next(error);
+    }
+});
 
 router.post('/', async (req, res, next) => {
     try {
