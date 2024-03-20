@@ -15,8 +15,8 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-router.get('/data', async (req, res, next) => {
-    const {userId} = req.body
+router.post('/data', async (req, res, next) => {
+    const { userId } = req.body;
     try {
         const user = await User.findOne({ user_id: userId });
         if (!user) {
