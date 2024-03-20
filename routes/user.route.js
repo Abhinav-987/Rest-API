@@ -60,17 +60,17 @@ router.post('/func', async (req, res, next) => {
         sender.connection = sender.connection || [];
         receiver.connection = receiver.connection || [];
         //to enshure uniqueness of the id inserted
-        // const senderConnectionSet = new Set(sender.connection);
-        // const receiverConnectionSet = new Set(receiver.connection);
+        const senderConnectionSet = new Set(sender.connection);
+        const receiverConnectionSet = new Set(receiver.connection);
 
-        // senderConnectionSet.add(receiver_id);
-        // receiverConnectionSet.add(sender_id);
+        senderConnectionSet.add(receiver_id);
+        receiverConnectionSet.add(sender_id);
 
-        // sender.connection = Array.from(senderConnectionSet);
-        // receiver.connection = Array.from(receiverConnectionSet);
+        sender.connection = Array.from(senderConnectionSet);
+        receiver.connection = Array.from(receiverConnectionSet);
 
-        sender.connection.push({ user_id: receiver_id, connected_at: new Date() });
-        receiver.connection.push({ user_id: sender_id, connected_at: new Date() });
+        // sender.connection.push({ user_id: receiver_id, connected_at: new Date() });
+        // receiver.connection.push({ user_id: sender_id, connected_at: new Date() });
         await sender.save();
         await receiver.save();
         res.status(200).json({ message: 'Connection populated successfully' });
