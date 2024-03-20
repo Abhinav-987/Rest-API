@@ -80,45 +80,6 @@ router.post('/func', async (req, res, next) => {
     }
 });
 
-//Query
-router.post('/query', async (req, res, next) => {
-    const { name } = req.query;
-
-    if (!name) {
-        return res.status(400).send({ message: "Name query parameter is required" });
-    }
-
-    try {
-        //duplicate
-        const existingUser = await User.findOne({ name });
-        if (existingUser) {
-            return res.status(409).send({ message: "User already exists" });
-        }
-        const user = new User({ name });
-        const result = await user.save();
-        res.status(200).send(result);
-    } catch (error) {
-        console.log(error.message);
-        next(error);
-    }
-});
-
-router.post('/query', async (req, res, next) => {
-    const desc = req.query
-})
-
-//Query
-router.get('/query', async (req, res, next) => {
-    const { name } = req.query;
-    try {
-        const user = await User.findOne({ name });
-        res.status(200).send(user);
-    } catch (error) {
-        console.log(error.message);
-        next(error);
-    }
-});
-
 router.get('/:id', async (req, res, next) => {
     // res.send('Getting a single product')
     const id = req.params.id
@@ -167,25 +128,5 @@ router.delete('/:id', async (req, res, next) => {
     // console.log(id)
     // res.send(id)
 })
-
-router.post('/query', async (req, res, next) => {
-    const { name } = req.query;
-    if (!name) {
-        return res.status(400).send({ message: "Name query parameter is required" });
-    }
-    try {
-        //duplicate
-        const existingUser = await User.findOne({ name });
-        if (existingUser) {
-            return res.status(409).send({ message: "User already exists" });
-        }
-        const user = new User({ name });
-        const result = await user.save();
-        res.status(200).send(result);
-    } catch (error) {
-        console.log(error.message);
-        next(error);
-    }
-});
 
 module.exports = router
