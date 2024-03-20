@@ -16,9 +16,9 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/data', async (req, res, next) => {
-    const { userId } = req.body;
+    const { user_id } = req.body;
     try {
-        const user = await User.findOne({ user_id: userId });
+        const user = await User.findOne({ user_id: user_id });
         if (!user) {
             throw createError(404, 'User not found');
         }
