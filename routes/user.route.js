@@ -64,7 +64,7 @@ router.post('/func', async (req, res, next) => {
 
         // sender.connection = Array.from(senderConnectionSet);
         // receiver.connection = Array.from(receiverConnectionSet);
-        const currentDate = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
+        const currentDate = new Date().toLocaleString('en-US ', { timeZone: 'Asia/Kolkata' });
         sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
         receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
         await sender.save();
