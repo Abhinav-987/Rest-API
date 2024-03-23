@@ -1,5 +1,0 @@
-###
-GEt http://localhost:3000/user
-
-###
-POST http://localhost:3000/user/func?sender_id=3&receiver_id=1
