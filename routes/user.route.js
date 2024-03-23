@@ -66,9 +66,8 @@ router.post('/func', async (req, res, next) => {
         // sender.connection = Array.from(senderConnectionSet);
         // receiver.connection = Array.from(receiverConnectionSet);
         const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
-        const cleancurrentDate = currentDate.replace(/\.\d{3}Z$/, '');
-        sender.connection.push({ user_id: receiver_id, connected_at: cleancurrentDate });
-        receiver.connection.push({ user_id: sender_id, connected_at: cleancurrentDate });
+        sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
+        receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
         await sender.save();
         await receiver.save();
         res.status(200).json({ message: 'Connection populated successfully' });
