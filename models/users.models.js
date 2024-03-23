@@ -22,9 +22,17 @@ const UserSchema = new Schema({
     type: String,
     //required: true
   },
-  connection : {
-    type: [String],
-  }
+  // connection : {
+  //   type: [String],
+  // }
+  connection : [{
+      user_id : {
+        type : String
+      },
+      connected_at : {
+        type : Date
+      }
+  }]
 });
 
 const User = mongoose.model('user', UserSchema);
