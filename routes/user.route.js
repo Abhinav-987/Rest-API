@@ -1,6 +1,7 @@
 const express = require('express')
 const createError = require('http-errors')
 const mongoose = require('mongoose')
+const moment = require('moment-timezone');
 const router = express.Router()
 
 const User = require("../models/users.models")
@@ -64,7 +65,7 @@ router.post('/func', async (req, res, next) => {
 
         // sender.connection = Array.from(senderConnectionSet);
         // receiver.connection = Array.from(receiverConnectionSet);
-        const currentDate = new Date().toLocaleString('en-US ', { timeZone: 'Asia/Kolkata' });
+        const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
         sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
         receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
         await sender.save();

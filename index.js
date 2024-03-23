@@ -9,11 +9,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended :  true}))
 
-// mongoose.connect('mongodb+srv://cluster0.o0sa0pz.mongodb.net', {
-//     dbName : 'My_Db',
-//     user : "abhinavk0212",
-//     pass : "iot12345"
-// })
 mongoose.connect(process.env.MONGODB_URI, {
     dbName : process.env.DB_NAME,
     user : process.env.DB_USER,
@@ -24,10 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .catch(err => console.log(err.message))
 
-// app.all('/test', (req, res) => {
-//     console.log(req.query)
-//     res.send(req.query)
-// })
 const UserRoute = require("./routes/user.route")
 app.use('/user', UserRoute)
 
