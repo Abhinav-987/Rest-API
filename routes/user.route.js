@@ -76,6 +76,22 @@ router.post('/func', async (req, res, next) => {
     }
 });
 
+router.post('/empty-connection/:id', async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        user.connection = [];
+        await user.save();
+        res.status(200).json({ message: 'Connection array emptied successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 router.get('/:id', async (req, res, next) => {
     // res.send('Getting a single product')
     const id = req.params.id
@@ -111,6 +127,8 @@ router.patch('/:id', async (req, res, next) => {
     // console.log(id)
     // res.send(id)
 })
+
+
 
 router.delete('/:id', async (req, res, next) => {
     // res.send('Deleting a single product')
