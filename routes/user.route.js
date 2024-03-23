@@ -64,9 +64,9 @@ router.post('/func', async (req, res, next) => {
 
         // sender.connection = Array.from(senderConnectionSet);
         // receiver.connection = Array.from(receiverConnectionSet);
-
-        sender.connection.push({ user_id: receiver_id, connected_at: new Date() });
-        receiver.connection.push({ user_id: sender_id, connected_at: new Date() });
+        const currentDate = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
+        sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
+        receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
         await sender.save();
         await receiver.save();
         res.status(200).json({ message: 'Connection populated successfully' });
