@@ -93,6 +93,23 @@ router.post('/empty-connection/:id', async (req, res, next) => {
     }
 });
 
+router.post('/user-connections', async (req, res, next) => {
+    const { user_id } = req.body;
+    if (!user_id) {
+        return res.status(400).json({ error: 'user_id is required' });
+    }
+    try {
+        const user = await User.findOne({ user_id: user_id });
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user.connection);
+    } catch (error) {
+        console.error(error);
+        next(error);
+    }
+});
+
 router.get('/:id', async (req, res, next) => {
     // res.send('Getting a single product')
     const id = req.params.id

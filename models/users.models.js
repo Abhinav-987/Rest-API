@@ -10,10 +10,6 @@ const UserSchema = new Schema({
     type: Number
     //required: true
   },
-  // mac_add: {
-  //   type: String
-  // },
-  //
   sender_id: {
     type: String,
     //required: true
@@ -22,9 +18,6 @@ const UserSchema = new Schema({
     type: String,
     //required: true
   },
-  // connection : {
-  //   type: [String],
-  // }
   connection : [{
       user_id : {
         type : String
