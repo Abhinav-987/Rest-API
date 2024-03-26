@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.use('/test', (req, res) => {
+app.get('/test', (req, res) => {
   res.send('Hello World!')
 })
 
