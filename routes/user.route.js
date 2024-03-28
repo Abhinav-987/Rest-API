@@ -54,20 +54,27 @@ router.post('/func', async (req, res, next) => {
         if (!sender || !receiver) {
             return res.status(404).json({ error: 'Sender or receiver user not found' });
         }
-        sender.connection = sender.connection || [];
-        receiver.connection = receiver.connection || [];
-        //to enshure uniqueness of the id inserted
-        // const senderConnectionSet = new Set(sender.connection);
-        // const receiverConnectionSet = new Set(receiver.connection);
-
-        // senderConnectionSet.add(receiver_id);
-        // receiverConnectionSet.add(sender_id);
-
-        // sender.connection = Array.from(senderConnectionSet);
-        // receiver.connection = Array.from(receiverConnectionSet);
+        // sender.connection = sender.connection || [];
+        // receiver.connection = receiver.connection || [];
+        // const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+        // sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
+        // receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
         const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
-        sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
-        receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
+        const updateorinsertConnection = (user, connectedUserId) => {
+            let connectionExists = false;
+            for (let connection of user.connection) {
+                if (connection.user_id === connectedUserId) {
+                    connection.connected_at = currentDate;
+                    connectionExists = true;
+                    break;
+                }
+            }
+            if (!connectionExists) {
+                user.connection.push({ user_id: connectedUserId, connected_at: currentDate });
+            }
+        };
+        updateorinsertConnection(sender, receiver_id);
+        updateorinsertConnection(receiver, sender_id);
         await sender.save();
         await receiver.save();
         res.status(200).json({ message: 'Connection populated successfully' });
