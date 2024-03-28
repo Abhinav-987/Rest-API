@@ -37,6 +37,10 @@ app.use((err, req, res, next) => {
     })
 })
 
+app.get('/test', (req, res) => {
+  res.send('Hello World!')
+})
+
 app.listen(PORT, () => {
     console.log('server started on port ' + PORT + '.....')
 })
