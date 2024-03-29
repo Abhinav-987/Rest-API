@@ -6,6 +6,24 @@ const UserSchema = new Schema({
     type: String,
     //required: true
   },
+  email: {
+    type: String,
+  },
+  password: {
+    type: String,
+  },
+  phone_no: {
+    type: Number,
+  },
+  organization_name:{
+    type: String,
+  },
+  bio : {
+    type: String,
+  },
+  linkedin_profile : {
+    type: String,
+  },
   user_id: {
     type: Number
     //required: true
