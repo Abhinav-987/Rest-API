@@ -8,43 +8,43 @@ const UserSchema = new Schema({
   },
   email: {
     type: String,
-    lowercase: true,
-    validate: {
-      validator: function(v) {
-        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-      },
-      message: props => `${props.value} is not a valid email!`
-    },
+    //lowercase: true,
+    //validate: {
+    //  validator: function(v) {
+    //    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+    //  },
+    //  message: props => `${props.value} is not a valid email!`
+    //},
   },
   password: {
     type: String,
   },
   phone_no: {
     type: Number,
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return /\d{10}/.test(v);
-      },
-      message: props => `${props.value} is not a valid phone number!`
-    },
+    //trim: true,
+    //validate: {
+    //  validator: function(v) {
+    //    return /\d{10}/.test(v);
+    //  },
+    //  message: props => `${props.value} is not a valid phone number!`
+    //},
   },
   organization_name:{
     type: String,
   },
   bio : {
     type: String,
-    maxlength: 250
+    //maxlength: 250
   },
   linkedin_profile : {
     type: String,
-    trim: true,
-    validate: {
-      validator: function(v) {
-        return /^www\.?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/.test(v);
-      },
-      message: props => `${props.value} is not a valid LinkedIn profile URL`
-    },
+    //trim: true,
+    //validate: {
+    //  validator: function(v) {
+    //    return /^www\.?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/.test(v);
+    //  },
+    //  message: props => `${props.value} is not a valid LinkedIn profile URL`
+    //},
   },
   user_id: {
     type: Number
