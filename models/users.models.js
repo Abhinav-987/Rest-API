@@ -41,7 +41,7 @@ const UserSchema = new Schema({
     trim: true,
     validate: {
       validator: function(v) {
-        return /^(www\.)?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/.test(v);
+        return /^www\.?linkedin\.com\/in\/[A-Za-z0-9-]+\/?$/.test(v);
       },
       message: props => `${props.value} is not a valid LinkedIn profile URL`
     },
