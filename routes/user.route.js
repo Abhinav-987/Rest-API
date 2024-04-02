@@ -59,7 +59,8 @@ router.post('/func', async (req, res, next) => {
         // const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
         // sender.connection.push({ user_id: receiver_id, connected_at: currentDate });
         // receiver.connection.push({ user_id: sender_id, connected_at: currentDate });
-        const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+        //const currentDate = moment().tz('Asia/Kolkata').format('YYYY-MM-DD HH:mm:ss');
+        const currentDate = new Date().toISOString();
         const updateorinsertConnection = (user, connectedUserId) => {
             let connectionExists = false;
             for (let connection of user.connection) {
